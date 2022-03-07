@@ -1,11 +1,25 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import {
+    View,
+    StyleSheet,
+    TextInput,
+    TouchableOpacity,
+    Keyboard,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
     return (
         <View style={styles.backgroundStyle}>
-            <Feather name="search" style={styles.iconStyle} />
+            <TouchableOpacity
+                onPress={() => {
+                    onTermSubmit();
+                    Keyboard.dismiss();
+                }}
+            >
+                <Feather name="search" style={styles.iconStyle} />
+            </TouchableOpacity>
+
             <TextInput
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -31,10 +45,11 @@ const styles = StyleSheet.create({
     inputStyle: {
         flex: 1,
         fontSize: 18,
+        marginLeft: 10,
     },
     iconStyle: {
         fontSize: 35,
-        alignSelf: "center",
+        marginVertical: 6,
         marginHorizontal: 15,
     },
 });
